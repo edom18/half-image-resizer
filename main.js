@@ -1,43 +1,6 @@
 (function () {
+
     'use strict';
-
-    var kernel = [
-        0, -1,  0,
-        -1,  5, -1,
-        0, -1,  0
-    ];
-
-    function createBuffer(img) {
-        var buffer = document.createElement('canvas');
-        var bufferCtx = buffer.getContext('2d');
-
-        buffer.width  = img.width;
-        buffer.height = img.height;
-        bufferCtx.drawImage(img, 0, 0);
-
-        return buffer;
-    }
-
-    function performFilter(cv, kernel) {
-        var buffer    = createBuffer(cv);
-        var bufferCtx = buffer.getContext('2d');
-
-        var src = bufferCtx.getImageData(0, 0, buffer.width, buffer.height);
-        var dst = bufferCtx.createImageData(src);
-
-        convolution(src, dst, kernel);
-        bufferCtx.putImageData(dst, 0, 0);
-
-        return buffer;
-    }
-
-    function sharpness(canvas) {
-        return performFilter(canvas, kernel);
-    }
-
-
-    //////////////////////////////////////////////////
-
 
     var canvas = document.createElement('canvas');
     var context = canvas.getContext('2d');
